@@ -81,16 +81,3 @@ class CU320:
         sts = subprocess.Popen(os.path.join(os.getcwd(), "bin", "Convert_SINAMICS_trace_CSV.exe")
                                + f" {input_file_name} -out {output_file_name} -sep SEMICOLON", shell=True).wait()
         return sts == 0
-
-
-if __name__ == '__main__':
-    while True:
-        cu = CU320()
-        cu.convert_tracefile_to_csv()
-        r = cu.login()
-        r = cu.check_logged_in()
-        newest_file = cu.get_last_tracefile_name()
-        file = cu.get_tracefile(newest_file, './')
-        r = cu.logout()
-
-        print(file)
